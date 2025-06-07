@@ -14,3 +14,15 @@ class Match(db.Model):
 
     def __repr__(self):
         return f"<Match {self.api_id} {self.home_team} vs {self.away_team}>"
+    
+        def to_dict(self):
+            return {
+                "id":          self.id,
+                "api_id":      self.api_id,
+                "utc_date":    self.utc_date.isoformat(),
+                "home_team":   self.home_team,
+                "away_team":   self.away_team,
+                "home_score":  self.home_score,
+                "away_score":  self.away_score,
+                "competition": self.competition,
+            }

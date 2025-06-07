@@ -10,7 +10,10 @@ def create_app():
 
     # initialize extensions
     db.init_app(app)
+
+    # register our matches API
+    from app.api.matches import bp as matches_bp
+    app.register_blueprint(matches_bp)
     
-    # register blueprints, etc…
     return app
 

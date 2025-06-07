@@ -2,3 +2,5 @@ Flask
 python-dotenv
 requestsFlask-SQLAlchemy
 psycopg2-binary
+pytest
+pytest-cov

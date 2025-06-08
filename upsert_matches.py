@@ -18,13 +18,13 @@ with app.app_context():
     # 3) insert all
     for m in matches:
         rec = Match(
-            api_id     = m["id"],
-            utc_date   = datetime.datetime.fromisoformat(m["utcDate"].replace("Z","")),
-            home_team  = m["homeTeam"]["name"],
-            away_team  = m["awayTeam"]["name"],
-            home_score = m["score"]["fullTime"]["home"],
-            away_score = m["score"]["fullTime"]["away"],
-            competition= m["competition"]["code"],
+            api_id=m["id"],
+            utc_date=datetime.datetime.fromisoformat(m["utcDate"].replace("Z", "")),
+            home_team=m["homeTeam"]["name"],
+            away_team=m["awayTeam"]["name"],
+            home_score=m["score"]["fullTime"]["home"],
+            away_score=m["score"]["fullTime"]["away"],
+            competition=m["competition"]["code"],
         )
         db.session.add(rec)
 

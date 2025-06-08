@@ -1,18 +1,21 @@
 import datetime
 
+
 def make_match_payload(api_id=42):
     return {
         "api_id": api_id,
         "utc_date": datetime.datetime.utcnow().isoformat(),
         "home_team": "Team A",
         "away_team": "Team B",
-        "competition": "PL"
+        "competition": "PL",
     }
+
 
 def test_list_empty(client):
     resp = client.get("/matches/")
     assert resp.status_code == 200
     assert resp.get_json() == []
+
 
 def test_create_and_get_match(client):
     payload = make_match_payload()
@@ -28,6 +31,7 @@ def test_create_and_get_match(client):
     assert resp.status_code == 200
     got = resp.get_json()
     assert got["home_team"] == "Team A"
+
 
 def test_update_and_delete(client):
     payload = make_match_payload(api_id=100)

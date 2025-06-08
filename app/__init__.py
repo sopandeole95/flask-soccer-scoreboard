@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
+
 def create_app(test_config: dict = None):
     app = Flask(__name__)
     app.config.from_object(Config)
@@ -17,7 +18,7 @@ def create_app(test_config: dict = None):
 
     # Register blueprints
     from app.api.matches import bp as matches_bp
+
     app.register_blueprint(matches_bp)
 
     return app
-

@@ -1,6 +1,8 @@
 Flask
 python-dotenv
-requestsFlask-SQLAlchemy
+requests
+Flask-SQLAlchemy
 psycopg2-binary
 pytest
 pytest-cov
+gunicorn

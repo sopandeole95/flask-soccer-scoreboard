@@ -1,13 +1,16 @@
 import requests
 from flask import current_app
 
+
 def fetch_competition_matches(competition="PL", date_from=None, date_to=None):
     cfg = current_app.config
     url = f"{cfg['SOCCER_API_URL']}/competitions/{competition}/matches"
     headers = {"X-Auth-Token": cfg["SOCCER_API_TOKEN"]}
     params = {}
-    if date_from: params["dateFrom"] = date_from
-    if date_to:   params["dateTo"]   = date_to
+    if date_from:
+        params["dateFrom"] = date_from
+    if date_to:
+        params["dateTo"] = date_to
 
     resp = requests.get(url, headers=headers, params=params)
     resp.raise_for_status()
@@ -27,19 +30,19 @@ def fetch_competitions():
 
 
 def fetch_live_matches_for_comps(comps, date_from=None, date_to=None):
-    cfg   = current_app.config
-    url   = f"{cfg['SOCCER_API_URL']}/matches"
+    cfg = current_app.config
+    url = f"{cfg['SOCCER_API_URL']}/matches"
     headers = {"X-Auth-Token": cfg["SOCCER_API_TOKEN"]}
-    params  = {"competitions": comps}
-    if date_from: params["dateFrom"] = date_from
-    if date_to:   params["dateTo"]   = date_to
+    params = {"competitions": comps}
+    if date_from:
+        params["dateFrom"] = date_from
+    if date_to:
+        params["dateTo"] = date_to
 
     resp = requests.get(url, headers=headers, params=params)
     resp.raise_for_status()
     return resp.json()["matches"]
 
-
-from app.services.api_client import fetch_competition_matches
 
 def fetch_multiple_competition_matches(comps, date_from=None, date_to=None):
     """

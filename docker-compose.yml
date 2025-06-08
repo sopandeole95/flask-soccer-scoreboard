@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:13
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: soccer
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: soccerdb
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  web:
+    build: .
+    depends_on:
+      - db
+    ports:
+      - "5000:5000"
+    env_file:
+      - .env
+    environment:
+      # In your .env file, set DATABASE_URL and SOCCER_API_TOKEN:
+      # DATABASE_URL=postgresql://soccer:password@db:5432/soccerdb
+      # SOCCER_API_TOKEN=your_token_here
+      DATABASE_URL: ${DATABASE_URL}
+      SOCCER_API_TOKEN: ${SOCCER_API_TOKEN}
+
+volumes:
+  pgdata:
